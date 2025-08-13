@@ -1,0 +1,2 @@
+# thevillagegist.com
+news blogs 
