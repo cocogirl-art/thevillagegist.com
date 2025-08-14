@@ -23,6 +23,11 @@ header {
   display: flex;
   align-items: center;
 }
+nav ul li a.active {
+    border-bottom: 2px solid #fff; /* White underline for current page */
+    color: #ffd700; /* Optional: gold color for active page */
+}
+
 
 .logo img {
   height: 50px;
@@ -606,3 +611,4 @@ footer a:hover {
 .contact-form button:hover {
   background-color: #45a049;
 }
+
