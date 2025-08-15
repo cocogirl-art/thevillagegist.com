@@ -611,4 +611,19 @@ footer a:hover {
 .contact-form button:hover {
   background-color: #45a049;
 }
+.date-bar {
+    background-color: #0a3d62; /* deep blue */
+    color: white;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: right;
+    border-bottom: 2px solid #ffcc00; /* gold underline */
+}
+
+.date-bar p {
+    margin: 0;
+}
+
+
 
