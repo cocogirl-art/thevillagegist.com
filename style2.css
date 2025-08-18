@@ -42,7 +42,6 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* Breaking News */
 .breaking-news {
   background: #ff3333;
   color: white;
@@ -165,6 +164,7 @@ header .logo {
     font-size: 0.9rem;
   }
 }
+
 
 
 
