@@ -7,14 +7,23 @@
 
 body {
   margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-
-  /* Background applied to all pages */
   background: url('../img/6photo.jpg') no-repeat center center fixed;
-  background-size: cover;       /* Stretch full width & height */
-  background-position: center;  /* Keep centered */
+  background-size: cover;
+  position: relative;
 }
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* transparent dark overlay */
+  z-index: -1;
+}
+
 
 
 header {
@@ -177,12 +186,6 @@ categories {
 
 
   
-    body {
-      background-color: #f3f3f3;
-      color: #333;
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
 
     h1 {
       color: #0055aa;
@@ -645,6 +648,7 @@ footer a:hover {
     font-weight: bold;
     margin-right: 10px;
 }
+
 
 
 
