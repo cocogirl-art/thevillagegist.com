@@ -6,9 +6,16 @@
 }
 
 body {
-  background-color: #f9f9f9;
-  color: #333;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+
+  /* Background applied to all pages */
+  background: url('../img/6photo.jpg') no-repeat center center fixed;
+  background-size: cover;       /* Stretch full width & height */
+  background-position: center;  /* Keep centered */
 }
+
 
 header {
   background-color: #c40000;
@@ -638,6 +645,7 @@ footer a:hover {
     font-weight: bold;
     margin-right: 10px;
 }
+
 
 
 
