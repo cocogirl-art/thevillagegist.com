@@ -144,6 +144,27 @@ nav a {
   text-decoration: none;
   font-weight: bold;
 }
+.news-item {
+  background: rgba(255,255,255,0.9);
+  color: #000;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.news-item h3 {
+  margin-top: 0;
+  color: #003366;
+}
+.news-item a {
+  color: #003366;
+  font-weight: bold;
+  text-decoration: none;
+}
+.news-item a:hover {
+  color: #ff6600;
+}
+
 
 footer {
   background-color: #333;
@@ -451,22 +472,6 @@ nav a:hover {
 .contact button:hover {
   background-color: darkslategray;
 }
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9; /* Change this to any color */
-  color: #333;
-  padding: 20px;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-image: url('6photo.jpg'); /* Replace with your image */
-  background-size: cover; /* Makes it cover the screen */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Avoid repetition */
-  color: #333;
-  padding: 20px;
-}
 
 
 footer {
@@ -688,6 +693,7 @@ footer a:hover {
     font-weight: bold;
     margin-right: 10px;
 }
+
 
 
 
