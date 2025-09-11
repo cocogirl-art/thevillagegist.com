@@ -1,91 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TheVillageGist News Network</title>
-  <link rel="stylesheet" href="style2.css" />
+  <link rel="stylesheet" href="assets/css/style2.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: url('assets/img/6photo.jpg') no-repeat center center/cover;
+    }
+    header {
+      background: rgba(0, 0, 50, 0.8);
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 10px;
+    }
+    .news-item {
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 15px;
+    }
+    .news-item img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+    .news-item h3 {
+      margin-top: 0;
+      color: #003366;
+    }
+    .news-item a {
+      color: #0077cc;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .news-item a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <img src="6photo.jpg" alt="TheVillageGist Logo" />
-      <h1>TheVillageGist</h1>
-    </div>
+    <h1>TheVillageGist News Network</h1>
     <nav>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="politics.html">Politics</a></li>
-        <li><a href="#">Community</a></li>
-        <li><a href="#">Opinion</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+                 <a href="index.html">Home</a>
+                <a href="local-news.html">Local News</a>
+                <a href="politics.html">Politics</a>
+                <a href="entertainment.html">Entertainment</a>
+                <a href="international.html">International</a>
+                <a href="crime-justice.html">Crime & Justice</a>
+                <a href="sports.html">Sports</a>
+                <a href="business.html">Business</a>
+                <a href="contact.html">Contact</a>
+
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Welcome to TheVillageGist News Network</h2>
-    <p>Your trusted source for local and community news.</p>
-  </section>
+  <div class="container">
+    <h2>Latest Headlines</h2>
+    <div id="news-list">
+      <p>Loading latest news from Nigeria...</p>
+    </div>
+  </div>
 
-  <main class="news-section">
-    <article class="news">
-      <img src="news-image.jpg" alt="News Headline" />
-      <h3>Top Story Title</h3>
-      <p>Short description of the top story goes here...</p>
-     <a href="news.html?id=${article.id}">Read More</a>
-    </article>
-<div id="news-container" class="container">
-  <h2>Latest News</h2>
-  <div id="news-list"></div>
-</div>
+  <script>
+    // Replace with your NewsAPI key
+    const apiKey = " dd6a6b47f7bc4041b5ebde833f408263";  
 
-<script>
-  // Load news from JSON
-  fetch('news.json')
-    .then(response => response.json())
-    .then(data => {
-      let newsList = document.getElementById("news-list");
-      data.forEach(article => {
-        let item = document.createElement("div");
-        item.classList.add("news-item");
-        item.innerHTML = `
-          <h3>${article.title}</h3>
-          <p><small>${article.date}</small></p>
-          ${article.image ? `<img src="${article.image}" style="max-width:100%;border-radius:8px;">` : ""}
-          <p>${article.content.substring(0,150)}...</p>
-          <a href="#">Read More</a>
-        `;
-        newsList.appendChild(item);
+    fetch(`https://newsapi.org/v2/top-headlines?country=ng&apiKey=${apiKey}`)
+      .then(response => response.json())
+      .then(data => {
+        const articles = data.articles;
+        const newsList = document.getElementById('news-list');
+        newsList.innerHTML = ""; // clear "loading..." text
+
+        articles.forEach(article => {
+          let item = document.createElement('div');
+          item.classList.add('news-item');
+          item.innerHTML = `
+            <h3>${article.title}</h3>
+            <p><small>${new Date(article.publishedAt).toDateString()}</small></p>
+            ${article.urlToImage ? `<img src="${article.urlToImage}">` : ""}
+            <p>${article.description || ""}</p>
+            <a href="${article.url}" target="_blank">Read More</a>
+          `;
+          newsList.appendChild(item);
+        });
+      })
+      .catch(err => {
+        console.error("Error fetching news:", err);
+        document.getElementById('news-list').innerHTML = "<p>Failed to load news. Please try again later.</p>";
       });
-    })
-    .catch(error => console.error("Error loading news:", error));
+  </script>
+  <script>
+  const apiKey = "" dd6a6b47f7bc4041b5ebde833f408263""; // replace with your real API key
+  const newsContainer = document.getElementById("news-container");
+
+  async function loadNews() {
+    try {
+      const response = await fetch(`https://newsapi.org/v2/top-headlines?country=ng&apiKey=${apiKey}`);
+      const data = await response.json();
+
+      newsContainer.innerHTML = ""; // clear old news
+
+      data.articles.forEach(article => {
+        const newsItem = document.createElement("div");
+        newsItem.classList.add("news-card");
+        newsItem.innerHTML = `
+          <img src="${article.urlToImage || 'assets/img/default.jpg'}" alt="">
+          <h3>${article.title}</h3>
+          <p>${article.description || ""}</p>
+          <a href="${article.url}" target="_blank">Read More</a>
+        `;
+        newsContainer.appendChild(newsItem);
+      });
+    } catch (error) {
+      console.error("Error fetching news:", error);
+      newsContainer.innerHTML = "<p>Unable to load news at the moment.</p>";
+    }
+  }
+
+  loadNews();
 </script>
 
-    <article class="news">
-      <img src="news-image2.jpg" alt="Another News" />
-      <h3>Another News Title</h3>
-      <p>Brief content for another news article here...</p>
-      <a href="#">Read more</a>
-    </article>
-    <section class="categories">
-  <h2>Browse by Category</h2>
-  <ul>
-    <li><a href="politics.html">Politics</a></li>
-    <li><a href="politics.html">Politics</a></li>
-    <li><a href="local-news.html">Local News</a></li>
-    <li><a href="international.html">International</a></li>
-    <li><a href="crime-justice.html">Crime & Justice</a></li>
-    <li><a href="entertainment.html">Entertainment</a></li>
-    <li><a href="sports.html">Sports</a></li>
-    <li><a href="business.html">Business</a></li>
-  </ul>
-</section>
-  </main>
-
+</body>
   <footer>
     <p>&copy; 2025 TheVillageGist News Network. All rights reserved.</p>
   </footer>
-</body>
+
 </html>
+
 
