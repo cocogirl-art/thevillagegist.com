@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News - TheVillageGist</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo"><img src="assets/img/logo.svg" alt="Logo"></a>
+      <nav>
+       <a href="index.html">Home</a>
+                <a href="local-news.html">Local News</a>
+                <a href="politics.html">Politics</a>
+                <a href="entertainment.html">Entertainment</a>
+                <a href="international.html">International</a>
+                <a href="crime-justice.html">Crime & Justice</a>
+                <a href="sports.html">Sports</a>
+                <a href="business.html">Business</a>
+                <a href="contact.html">Contact</a>
+
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="news-full"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TheVillageGist News. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Parse query string to get ?id=market-opens or something similar
+    const params = new URLSearchParams(window.location.search);
+    const newsId = params.get('id');
+    fetch('news.json')
+      .then(res => res.json())
+      .then(data => {
+        const article = data.find(item => item.id === newsId);
+        const container = document.getElementById('news-full');
+        if (!article) {
+          container.innerHTML = '<p>News article not found.</p>';
+          return;
+        }
+        container.innerHTML = `
+          <h1>${article.title}</h1>
+          <p><small>${article.date}</small></p>
+          ${article.image ? `<img src="${article.image}" style="max-width:100%; border-radius:8px;" alt="${article.title}">` : ''}
+          <p>${article.content}</p>
+          <a href="index.html">← Back to Latest News</a>
+        `;
+      })
+      .catch(err => {
+        console.error('Could not load news:', err);
+        document.getElementById('news-full').innerHTML = '<p>Error loading article.</p>';
+      });
+  </script>
+</body>
+</html>
