@@ -35,6 +35,32 @@
       <p>Short description of the top story goes here...</p>
       <a href="#">Read more</a>
     </article>
+<div id="news-container" class="container">
+  <h2>Latest News</h2>
+  <div id="news-list"></div>
+</div>
+
+<script>
+  // Load news from JSON
+  fetch('news.json')
+    .then(response => response.json())
+    .then(data => {
+      let newsList = document.getElementById("news-list");
+      data.forEach(article => {
+        let item = document.createElement("div");
+        item.classList.add("news-item");
+        item.innerHTML = `
+          <h3>${article.title}</h3>
+          <p><small>${article.date}</small></p>
+          ${article.image ? `<img src="${article.image}" style="max-width:100%;border-radius:8px;">` : ""}
+          <p>${article.content.substring(0,150)}...</p>
+          <a href="#">Read More</a>
+        `;
+        newsList.appendChild(item);
+      });
+    })
+    .catch(error => console.error("Error loading news:", error));
+</script>
 
     <article class="news">
       <img src="news-image2.jpg" alt="Another News" />
