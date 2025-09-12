@@ -739,6 +739,16 @@ nav ul li a.active {
   padding: 6px 12px;
   border-radius: 4px;
 }
+.sidebar {
+  grid-area: sidebar;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+.main-content {
+  grid-area: main;
+  background-color: #e8f0fe;
+  padding: 20px;
+}
 
 
 
