@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>TheVillageGist News Network</title>
+    <link>https://thevillagegist.com/</link>
+    <description>Latest local news from Ewatto, Esan, and Edo State.</description>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 08 Oct 2025 08:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Ewatto Farmers Begin Land Preparation Ahead of New Farming Season</title>
+      <link>https://thevillagegist.com/local-news/ewatto-farmers-begin.html</link>
+      <description>Farmers across Ewatto have started clearing lands for the 2025 farming season, with many focusing on cassava, yam, and pepper cultivation.</description>
+      <pubDate>Tue, 08 Oct 2025 07:30:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>Esan South East Council Launches Rural Road Maintenance Initiative</title>
+      <link>https://thevillagegist.com/local-news/rural-road-maintenance.html</link>
+      <description>The Esan South East Local Government Council has flagged off a community road maintenance project to improve rural access and transportation.</description>
+      <pubDate>Mon, 07 Oct 2025 16:20:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>Youth Groups Call for Peace Ahead of Upcoming Community Elections</title>
+      <link>https://thevillagegist.com/local-news/youth-call-for-peace.html</link>
+      <description>Youth leaders across Esan land are urging peace and tolerance as local elections draw near.</description>
+      <pubDate>Mon, 06 Oct 2025 12:00:00 +0000</pubDate>
+    </item>
+
+  </channel>
+</rss>
