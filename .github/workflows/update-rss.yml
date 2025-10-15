@@ -88,3 +88,17 @@ jobs:
         git add rss.xml
         git commit -m "Auto-update TheVillageGist RSS Feed" || echo "No changes to commit"
         git push
+            - name: Upload RSS feed to AWS S3
+      uses: aws-actions/s3-sync@v1
+      with:
+        args: --acl public-read
+      env:
+        AWS_S3_BUCKET: thevillagegist.com
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+      with:
+        source: .
+        destination: s3://${{ env.AWS_S3_BUCKET }}/
+        args: --exclude "*" --include "rss.xml"
+
