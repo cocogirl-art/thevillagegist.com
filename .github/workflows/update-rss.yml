@@ -1,0 +1,90 @@
+name: Update TheVillageGist RSS Feed
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # Runs every 6 hours
+  workflow_dispatch:        # Allows manual trigger
+
+jobs:
+  update-rss:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install feedparser requests
+
+    - name: Fetch latest Nigerian news and update RSS for TheVillageGist
+      run: |
+        python3 << 'EOF'
+        import feedparser, datetime, xml.etree.ElementTree as ET
+
+        # ---------- SITE INFO ----------
+        SITE_NAME = "TheVillageGist News Network"
+        SITE_URL = "https://thevillagegist.com"
+        SITE_LOGO = "https://thevillagegist.com/images/logo.png"
+        SITE_DESC = "Latest Local and National News from Ewatto, Esan, and across Nigeria."
+
+        # ---------- SOURCE FEEDS ----------
+        FEEDS = [
+            "https://saharareporters.com/feed",
+            "https://www.vanguardngr.com/feed/",
+            "https://punchng.com/feed/",
+            "https://www.channelstv.com/feed/"
+        ]
+
+        rss_file = "rss.xml"
+
+        # ---------- SETUP ROOT STRUCTURE ----------
+        try:
+            tree = ET.parse(rss_file)
+            root = tree.getroot()
+            channel = root.find("channel")
+        except Exception:
+            root = ET.Element("rss", version="2.0")
+            channel = ET.SubElement(root, "channel")
+            ET.SubElement(channel, "title").text = SITE_NAME
+            ET.SubElement(channel, "link").text = SITE_URL
+            ET.SubElement(channel, "description").text = SITE_DESC
+            ET.SubElement(channel, "image")
+            image_tag = ET.SubElement(channel, "image")
+            ET.SubElement(image_tag, "url").text = SITE_LOGO
+            ET.SubElement(image_tag, "title").text = SITE_NAME
+            ET.SubElement(image_tag, "link").text = SITE_URL
+
+        # ---------- CLEAR OLD ITEMS ----------
+        for item in channel.findall("item"):
+            channel.remove(item)
+
+        # ---------- FETCH AND ADD NEW ITEMS ----------
+        for url in FEEDS:
+            feed = feedparser.parse(url)
+            for entry in feed.entries[:3]:  # get top 3 per source
+                item = ET.SubElement(channel, "item")
+                ET.SubElement(item, "title").text = entry.title
+                ET.SubElement(item, "link").text = entry.link
+                ET.SubElement(item, "pubDate").text = datetime.datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
+                ET.SubElement(item, "description").text = entry.get("summary", "")[:500]
+                ET.SubElement(item, "source").text = f"Published via {SITE_NAME}"
+                ET.SubElement(item, "guid").text = entry.link
+
+        # ---------- SAVE FILE ----------
+        tree = ET.ElementTree(root)
+        tree.write(rss_file, encoding="utf-8", xml_declaration=True)
+        EOF
+
+    - name: Commit and push updated RSS
+      run: |
+        git config user.name "TheVillageGist Bot"
+        git config user.email "bot@thevillagegist.com"
+        git add rss.xml
+        git commit -m "Auto-update TheVillageGist RSS Feed" || echo "No changes to commit"
+        git push
