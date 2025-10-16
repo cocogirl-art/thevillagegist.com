@@ -1,41 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
   <channel>
-    <title>TheVillageGist News Network</title>
-    <link>https://thevillagegist.com/</link>
-    <description>Latest local news from Ewatto, Esan, and Edo State.</description>
+    <title>The Village Gist News Network</title>
+    <link>https://www.thevillagegist.com</link>
+    <description>Local and National News from The Village Gist</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 08 Oct 2025 08:00:00 +0000</lastBuildDate>
+    <copyright>© 2025 The Village Gist</copyright>
 
+    <image>
+      <url>https://www.thevillagegist.com/images/logo.png</url>
+      <title>The Village Gist News Network</title>
+      <link>https://www.thevillagegist.com</link>
+    </image>
+
+    <!-- Example First Story -->
     <item>
-      <title>Ewatto Farmers Begin Land Preparation Ahead of New Farming Season</title>
-      <link>https://thevillagegist.com/local-news/ewatto-farmers-begin.html</link>
-      <description>Farmers across Ewatto have started clearing lands for the 2025 farming season, with many focusing on cassava, yam, and pepper cultivation.</description>
-      <pubDate>Tue, 08 Oct 2025 07:30:00 +0000</pubDate>
+      <title>FG Unveils New Agricultural Initiative to Boost Food Production</title>
+      <link>https://www.thevillagegist.com/news/agricultural-initiative.html</link>
+      <description>The Federal Government has announced a new nationwide agricultural plan aimed at increasing local food output and empowering rural farmers.</description>
+      <pubDate>Tue, 08 Oct 2025 09:00:00 +0100</pubDate>
+      <guid>https://www.thevillagegist.com/news/agricultural-initiative.html</guid>
     </item>
-
-    <item>
-      <title>Esan South East Council Launches Rural Road Maintenance Initiative</title>
-      <link>https://thevillagegist.com/local-news/rural-road-maintenance.html</link>
-      <description>The Esan South East Local Government Council has flagged off a community road maintenance project to improve rural access and transportation.</description>
-      <pubDate>Mon, 07 Oct 2025 16:20:00 +0000</pubDate>
-    </item>
-
-    <item>
-      <title>Youth Groups Call for Peace Ahead of Upcoming Community Elections</title>
-      <link>https://thevillagegist.com/local-news/youth-call-for-peace.html</link>
-      <description>Youth leaders across Esan land are urging peace and tolerance as local elections draw near.</description>
-      <pubDate>Mon, 06 Oct 2025 12:00:00 +0000</pubDate>
-    </item>
-    <item>
-  <title>Retired Nigerian Police Officers Storm National Assembly, Demand Exit From ‘Fraudulent’ Contributory Pension Scheme</title>
-  <link>https://www.thevillagegist.com/local-news.html</link>
-  <description>Retired officers of the Nigeria Police are protesting at the National Assembly in Abuja, demanding removal from the Contributory Pension Scheme (CPS), which they describe as fraudulent.</description>
-  <pubDate>Tue, 07 Oct 2025 10:00:00 GMT</pubDate>
-  <guid>https://www.thevillagegist.com/local-news.html#police-pension-protest</guid>
-</item>
-
 
   </channel>
 </rss>
-
