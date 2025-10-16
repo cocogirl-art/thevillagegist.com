@@ -170,3 +170,30 @@ categories {
   background-color: #e8f0fe;
   padding: 20px;
 }
+.news-article {
+  background: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.news-article img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.news-article h2 {
+  color: #b22222;
+  margin-bottom: 5px;
+}
+
+.news-article .meta {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
