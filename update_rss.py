@@ -15,9 +15,22 @@ COPYRIGHT = "© 2025 The Village Gist"
 def extract_meta(html_content):
     title_match = re.search(r"<title>(.*?)</title>", html_content, re.IGNORECASE | re.DOTALL)
     desc_match = re.search(r'<meta\s+name=["\']description["\']\s+content=["\'](.*?)["\']', html_content, re.IGNORECASE)
+    date_match = re.search(r'<meta\s+name=["\']date["\']\s+content=["\'](.*?)["\']', html_content, re.IGNORECASE)
+
     title = title_match.group(1).strip() if title_match else "Untitled Article"
     desc = desc_match.group(1).strip() if desc_match else "No description available."
-    return title, desc
+    
+    # Try to format the date properly
+    if date_match:
+        try:
+            date_str = date_match.group(1).strip()
+            pub_date = datetime.strptime(date_str, "%Y-%m-%d").strftime("%a, %d %b %Y %H:%M:%S +0100")
+        except ValueError:
+            pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0100")
+    else:
+        pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0100")
+
+    return title, desc, pub_date
 
 # --- RSS GENERATION ---
 def generate_rss(news_items):
@@ -57,9 +70,8 @@ def main():
             file_path = os.path.join(folder_path, file)
             with open(file_path, "r", encoding="utf-8") as f:
                 html_content = f.read()
-                title, desc = extract_meta(html_content)
+                title, desc, pub_date = extract_meta(html_content)
                 link = f"{SITE_URL}/{NEWS_FOLDER}/{file}"
-                pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0100")
                 news_items.append({
                     "title": title,
                     "description": desc,
