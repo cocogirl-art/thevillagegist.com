@@ -19,8 +19,11 @@ def extract_meta(html_content):
 
     title = title_match.group(1).strip() if title_match else "Untitled Article"
     desc = desc_match.group(1).strip() if desc_match else "No description available."
+    # Truncate long descriptions
+    if len(desc) > 200:
+        desc = desc[:197] + "..."
     
-    # Try to format the date properly
+    # Parse date or use current time
     if date_match:
         try:
             date_str = date_match.group(1).strip()
@@ -78,6 +81,9 @@ def main():
                     "link": link,
                     "pubDate": pub_date
                 })
+
+    # Sort by date descending (most recent first)
+    news_items.sort(key=lambda x: x["pubDate"], reverse=True)
 
     rss_content = generate_rss(news_items)
     with open(RSS_FILE, "w", encoding="utf-8") as rss_file:
